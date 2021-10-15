@@ -209,6 +209,30 @@ SEND:
     return 1;
 }
 
+bool HIDKeyboard::isKeyPressed(uint8_t k) {
+  for (uint8_t i = 0; i < sizeof(keyReport.keys); i++) {
+    if (keyReport.keys[i] == k) {
+      return true;
+    }
+  }
+  return false;
+}
+
+#define HID_KEYBOARD_FIRST_MODIFIER 0xE0
+#define HID_KEYBOARD_LAST_MODIFIER 0xE7
+
+bool HIDKeyboard::isModifierActive(uint8_t m) {
+  if (m >= HID_KEYBOARD_FIRST_MODIFIER && m <= HID_KEYBOARD_LAST_MODIFIER) {
+    m = m - HID_KEYBOARD_FIRST_MODIFIER;
+    return !!(keyReport.modifiers & (1 << m));
+  }
+  return false;
+}
+
+bool HIDKeyboard::isAnyModifierActive() {
+  return keyReport.modifiers > 0;
+}
+
 // release() takes the specified key out of the persistent key report and
 // sends the report.  This tells the OS the key is no longer pressed and that
 // it shouldn't be repeated any more.

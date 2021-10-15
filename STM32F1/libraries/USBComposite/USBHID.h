@@ -618,6 +618,9 @@ public:
 	virtual size_t press(uint8_t k);
 	virtual size_t release(uint8_t k);
 	virtual void releaseAll(void);
+  virtual bool isKeyPressed(uint8_t k);
+  virtual bool isModifierActive(uint8_t m);
+  virtual bool isAnyModifierActive();
 };
 
 
