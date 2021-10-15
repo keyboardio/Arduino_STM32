@@ -141,6 +141,8 @@ static const uint8_t ascii_to_hid[128] =
 
 void HIDKeyboard::begin(void){
     HID.addOutputBuffer(&ledData);
+    memset(&last_report_, 0, sizeof(last_report_));
+    memset(&keyReport, 0, sizeof(keyReport));
 }
 
 void HIDKeyboard::end(void) {
@@ -209,6 +211,9 @@ SEND:
     return 1;
 }
 
+#define HID_KEYBOARD_FIRST_MODIFIER 0xE0
+#define HID_KEYBOARD_LAST_MODIFIER 0xE7
+
 bool HIDKeyboard::isKeyPressed(uint8_t k) {
   for (uint8_t i = 0; i < sizeof(keyReport.keys); i++) {
     if (keyReport.keys[i] == k) {
@@ -217,9 +222,6 @@ bool HIDKeyboard::isKeyPressed(uint8_t k) {
   }
   return false;
 }
-
-#define HID_KEYBOARD_FIRST_MODIFIER 0xE0
-#define HID_KEYBOARD_LAST_MODIFIER 0xE7
 
 bool HIDKeyboard::isModifierActive(uint8_t m) {
   if (m >= HID_KEYBOARD_FIRST_MODIFIER && m <= HID_KEYBOARD_LAST_MODIFIER) {
@@ -231,6 +233,27 @@ bool HIDKeyboard::isModifierActive(uint8_t m) {
 
 bool HIDKeyboard::isAnyModifierActive() {
   return keyReport.modifiers > 0;
+}
+
+bool HIDKeyboard::wasKeyPressed(uint8_t k) {
+  for (uint8_t i = 0; i < sizeof(last_report_.keys); i++) {
+    if (last_report_.keys[i] == k) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool HIDKeyboard::wasModifierActive(uint8_t m) {
+  if (m >= HID_KEYBOARD_FIRST_MODIFIER && m <= HID_KEYBOARD_LAST_MODIFIER) {
+    m = m - HID_KEYBOARD_FIRST_MODIFIER;
+    return !!(last_report_.modifiers & (1 << m));
+  }
+  return false;
+}
+
+bool HIDKeyboard::wasAnyModifierActive() {
+  return last_report_.modifiers > 0;
 }
 
 // release() takes the specified key out of the persistent key report and
@@ -277,4 +300,12 @@ size_t HIDKeyboard::write(uint8_t c)
     else {
         return 0;
     }
+}
+
+void HIDKeyboard::sendReport() {
+  if (!memcmp(&last_report_, &keyReport, sizeof(keyReport)))
+    return;
+
+  HIDReporter::sendReport();
+  memcpy(&last_report_, &keyReport, sizeof(keyReport));
 }

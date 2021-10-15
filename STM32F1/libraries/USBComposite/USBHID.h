@@ -419,7 +419,7 @@ class HIDReporter {
         USBHID& HID;
         
     public:
-        void sendReport(); 
+        virtual void sendReport();
         // if you use this init function, the buffer starts with a reportID, even if the reportID is zero,
         // and bufferSize includes the reportID; if reportID is zero, sendReport() will skip the initial
         // reportID byte
@@ -591,9 +591,9 @@ typedef struct{
 
 class HIDKeyboard : public Print, public HIDReporter {
 public:
-	KeyReport_t keyReport;
-    
-protected:    
+	KeyReport_t keyReport, last_report_;
+
+protected:
     uint8_t leds[HID_BUFFER_ALLOCATE_SIZE(1,1)];
     HIDBuffer_t ledData;
     uint8_t reportID;
@@ -621,6 +621,10 @@ public:
   virtual bool isKeyPressed(uint8_t k);
   virtual bool isModifierActive(uint8_t m);
   virtual bool isAnyModifierActive();
+  virtual bool wasKeyPressed(uint8_t k);
+  virtual bool wasModifierActive(uint8_t m);
+  virtual bool wasAnyModifierActive();
+  virtual void sendReport();
 };
 
 
