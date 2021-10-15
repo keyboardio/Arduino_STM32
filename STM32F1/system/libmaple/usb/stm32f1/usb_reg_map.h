@@ -43,7 +43,7 @@
 /** USB register map type */
 typedef struct usb_reg_map {
     __IO uint32 EP[USB_NR_EP_REGS]; /**< Endpoint registers */
-    const uint32 RESERVED[8];       /**< Reserved */
+    const uint32 RESERVED_[8];       /**< Reserved */
     __IO uint32 CNTR;               /**< Control register */
     __IO uint32 ISTR;               /**< Interrupt status register */
     __IO uint32 FNR;                /**< Frame number register */
