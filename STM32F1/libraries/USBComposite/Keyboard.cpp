@@ -1,4 +1,4 @@
-#include "USBComposite.h" 
+#include "USBComposite.h"
 #include <string.h>
 
 //================================================================================
@@ -153,14 +153,14 @@ void HIDKeyboard::end(void) {
 uint8_t HIDKeyboard::getKeyCode(uint8_t k, uint8_t* modifiersP)
 {
     *modifiersP = 0;
-    
+
     if (adjustForHostCapsLock && (getLEDs() & 0x02)) { // capslock is down on host OS, so host will reverse
-        if ('a' <= k && k <= 'z') 
+        if ('a' <= k && k <= 'z')
             k += 'A'-'a';
-        else if ('A' <= k && k <= 'Z') 
+        else if ('A' <= k && k <= 'Z')
             k += 'a'-'A';
     }
-    
+
     if (k < 0x80) {
         k = ascii_to_hid[k];
         if (k & SHIFT) {
@@ -175,14 +175,14 @@ uint8_t HIDKeyboard::getKeyCode(uint8_t k, uint8_t* modifiersP)
     else { // shift key
         *modifiersP = 1<<(k-0x80);
         return 0;
-    }    
+    }
 }
 
 size_t HIDKeyboard::press(uint8_t k) {
     uint8_t modifiers;
-    
+
     k = getKeyCode(k, &modifiers);
-    
+
     if (k == 0) {
         if (modifiers == 0) {
             return 0;
@@ -205,7 +205,7 @@ size_t HIDKeyboard::press(uint8_t k) {
 
 SEND:
     keyReport.modifiers |= modifiers;
-    sendReport();
+    //sendReport();
     return 1;
 }
 
@@ -216,7 +216,7 @@ size_t HIDKeyboard::release(uint8_t k)
 {
     uint8_t modifiers;
     k = getKeyCode(k, &modifiers);
-    
+
     if (k != 0) {
         for (unsigned i=0; i<HID_KEYBOARD_ROLLOVER; i++) {
              if (keyReport.keys[i] == k) {
@@ -229,10 +229,10 @@ size_t HIDKeyboard::release(uint8_t k)
         if (modifiers == 0)
             return 0;
     }
-    
+
     keyReport.modifiers &= ~modifiers;
-    
-	sendReport();
+
+    //sendReport();
 	return 1;
 }
 
@@ -240,8 +240,8 @@ void HIDKeyboard::releaseAll(void)
 {
     memset(keyReport.keys, 0, HID_KEYBOARD_ROLLOVER);
 	keyReport.modifiers = 0;
-	
-	sendReport();
+
+	//sendReport();
 }
 
 size_t HIDKeyboard::write(uint8_t c)
@@ -254,4 +254,3 @@ size_t HIDKeyboard::write(uint8_t c)
         return 0;
     }
 }
-
