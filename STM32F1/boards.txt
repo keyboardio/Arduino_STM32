@@ -6,31 +6,66 @@ menu.upload_method=Upload method
 menu.cpu_speed=CPU Speed(MHz)
 menu.opt=Optimize
 
-##############################################################
-##############################################################
-kbio_test.name=KBIO Test
+####
 
+kbio_test.name=KBIO test
 kbio_test.vid.0=0x1EAF
 kbio_test.pid.0=0x0004
-kbio_test.build.board=MAPLE_RET6
+kbio_test.build.variant=generic_stm32f103c
+kbio_test.build.vect=VECT_TAB_ADDR=0x8000000
 kbio_test.build.core=maple
-kbio_test.build.cpu_flags=-DMCU_STM32F103RE -DSERIAL_USB
-kbio_test.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKBIO_TEST
-
-
-kbio_test.build.ldscript=ld/stm32f103re-bootloader.ld
-kbio_test.build.variant=maple_ret6
-kbio_test.build.vect=VECT_TAB_ADDR=0x8005000
-
-kbio_test.upload.tool=maple_upload
-kbio_test.upload.protocol=maple_dfu
-kbio_test.upload.maximum_size=262144
-kbio_test.upload.maximum_data_size=49152
+kbio_test.build.board=GENERIC_STM32F103C
+kbio_test.build.error_led_port=GPIOC
+kbio_test.build.error_led_pin=13
 kbio_test.upload.use_1200bps_touch=false
 kbio_test.upload.file_type=bin
-kbio_test.upload.usbID=1EAF:0003
-kbio_test.upload.altID=1
 kbio_test.upload.auto_reset=true
+kbio_test.upload.tool=maple_upload
+kbio_test.upload.protocol=maple_dfu
+kbio_test.build.cpu_flags=-DMCU_STM32F103C6
+kbio_test.build.ldscript=ld/jtag_c6.ld
+kbio_test.upload.maximum_size=32768
+kbio_test.upload.maximum_data_size=10240
+kbio_test.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKBIO_TEST -DUSBCON
+
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+kbio_test.menu.upload_method.DFUUploadMethod=STM32duino bootloader
+kbio_test.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+kbio_test.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+kbio_test.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+kbio_test.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
+kbio_test.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader_20_c6.ld
+kbio_test.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+kbio_test.menu.upload_method.DFUUploadMethod.upload.altID=2
+kbio_test.menu.upload_method.DFUUploadMethod.upload.maximum_size=24576
+
+kbio_test.menu.upload_method.serialMethod=Serial
+kbio_test.menu.upload_method.serialMethod.upload.protocol=maple_serial
+kbio_test.menu.upload_method.serialMethod.upload.tool=serial_upload
+kbio_test.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
+
+kbio_test.menu.upload_method.STLinkMethod=STLink
+kbio_test.menu.upload_method.STLinkMethod.upload.protocol=STLink
+kbio_test.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+kbio_test.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
+
+kbio_test.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+kbio_test.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+kbio_test.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+kbio_test.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
+
+kbio_test.menu.upload_method.jlinkMethod=JLink
+kbio_test.menu.upload_method.jlinkMethod.upload.protocol=jlink
+kbio_test.menu.upload_method.jlinkMethod.upload.tool=jlink_upload
+kbio_test.menu.upload_method.jlinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
+
+#kbio_test.menu.upload_method.HIDUploadMethod=HID bootloader 2.0
+#kbio_test.menu.upload_method.HIDUploadMethod.upload.tool=hid_upload
+#kbio_test.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+#kbio_test.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8001000
+#kbio_test.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader_c6.ld
 
 #-- CPU Clock frequency
 kbio_test.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
