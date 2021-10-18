@@ -29,7 +29,7 @@ keyboardio_model_100.build.ldscript=ld/jtag_c6.ld
 keyboardio_model_100.build.mcu=cortex-m4
 keyboardio_model_100.upload.maximum_size=1048576
 keyboardio_model_100.upload.maximum_data_size=98304
-keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-Keyboardio-Model100.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON
+keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-Keyboardio-Model100.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON -DKBIO_TEST
 
 
 #---------------------------- UPLOAD METHODS ---------------------------
@@ -530,7 +530,7 @@ genericSTM32F103C6.build.cpu_flags=-DMCU_STM32F103C6
 genericSTM32F103C6.build.ldscript=ld/jtag_c6.ld
 genericSTM32F103C6.upload.maximum_size=32768
 genericSTM32F103C6.upload.maximum_data_size=10240
-genericSTM32F103C6.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON
+genericSTM32F103C6.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKBIO_TEST -DUSBCON
 
 
 #---------------------------- UPLOAD METHODS ---------------------------
