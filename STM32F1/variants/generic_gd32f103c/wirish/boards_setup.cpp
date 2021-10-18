@@ -42,22 +42,30 @@
 #include <boards.h>
 #include <usb_serial.h>
 
-// Generic GD32 boards seem to have a 12Mhz crystal rather than the 8Mhz common on STM32 boards, hence the PLL multiplier settings are different.
-// Additionally the GD32 has a 4 USB PLL divider settings, rather than the 2 settings in the STM32, which allow it to operate on frequencies of 48,72,96 and 120Mhz and still have USB functioning
 
+
+// Allow boards to provide a PLL multiplier. This is useful for
+// e.g. STM32F100 value line MCUs, which use slower multipliers.
+// (We're leaving the default to RCC_PLLMUL_9 for now, since that
+// works for F103 performance line MCUs, which is all that LeafLabs
+// currently officially supports).
 #ifndef BOARD_RCC_PLLMUL
-#if !USE_HSI_CLOCK
-#if F_CPU==120000000
-	#define BOARD_RCC_PLLMUL RCC_PLLMUL_10
-#elif F_CPU==96000000
-	#define BOARD_RCC_PLLMUL RCC_PLLMUL_8
-#elif F_CPU==72000000
-	#define BOARD_RCC_PLLMUL RCC_PLLMUL_6	
+  #if !USE_HSI_CLOCK
+        #if F_CPU==128000000
+                #define BOARD_RCC_PLLMUL RCC_PLLMUL_16
+        #elif F_CPU==72000000
+                #define BOARD_RCC_PLLMUL RCC_PLLMUL_9
+        #elif F_CPU==48000000
+                #define BOARD_RCC_PLLMUL RCC_PLLMUL_6
+        #elif F_CPU==16000000
+                #define BOARD_RCC_PLLMUL RCC_PLLMUL_2
+        #endif
+  #else
+        #define BOARD_RCC_PLLMUL RCC_PLLMUL_16
+  #endif
 #endif
-#else
-	#define BOARD_RCC_PLLMUL RCC_PLLMUL_16
-#endif
-#endif
+
+
 
 namespace wirish {
     namespace priv {

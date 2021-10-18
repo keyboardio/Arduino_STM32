@@ -34,6 +34,10 @@ keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {
 
 #---------------------------- UPLOAD METHODS ---------------------------
 
+keyboardio_model_100.menu.upload_method.STLinkMethod=STLink
+keyboardio_model_100.menu.upload_method.STLinkMethod.upload.protocol=STLink
+keyboardio_model_100.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+keyboardio_model_100.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 keyboardio_model_100.menu.upload_method.DFUUploadMethod=STM32duino bootloader
 keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
 keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
@@ -45,10 +49,6 @@ keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.altID=2
 keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.maximum_size=1024000
 keyboardio_model_100.menu.upload_method.DFUUploadMethod.build.flash_offset=0x2000
 
-keyboardio_model_100.menu.upload_method.STLinkMethod=STLink
-keyboardio_model_100.menu.upload_method.STLinkMethod.upload.protocol=STLink
-keyboardio_model_100.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
-keyboardio_model_100.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 
 #-- Optimizations
 keyboardio_model_100.menu.opt.osstd=Smallest (default)
