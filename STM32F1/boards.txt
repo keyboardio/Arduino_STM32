@@ -7,103 +7,79 @@ menu.cpu_speed=CPU Speed(MHz)
 menu.opt=Optimize
 
 ####
-
-kbio_test.name=KBIO test
-kbio_test.vid.0=0x1EAF
-kbio_test.pid.0=0x0004
-kbio_test.build.variant=generic_stm32f103c
-kbio_test.build.vect=VECT_TAB_ADDR=0x8000000
-kbio_test.build.core=maple
-kbio_test.build.board=GENERIC_STM32F103C
-kbio_test.build.error_led_port=GPIOC
-kbio_test.build.error_led_pin=13
-kbio_test.upload.use_1200bps_touch=false
-kbio_test.upload.file_type=bin
-kbio_test.upload.auto_reset=true
-kbio_test.upload.tool=maple_upload
-kbio_test.upload.protocol=maple_dfu
-kbio_test.build.cpu_flags=-DMCU_STM32F103C6
-kbio_test.build.ldscript=ld/jtag_c6.ld
-kbio_test.upload.maximum_size=32768
-kbio_test.upload.maximum_data_size=10240
-kbio_test.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKBIO_TEST -DUSBCON
+keyboardio_model_100.build.vid=0x3496
+keyboardio_model_100.build.pid=0x0006
+keyboardio_model_100.build.usb_product="Model 100"
+keyboardio_model_100.build.usb_manufacturer="Keyboardio"
+keyboardio_model_100.name=Keyboardio Model 100
+keyboardio_model_100.build.variant=generic_stm32f103c
+keyboardio_model_100.build.vect=VECT_TAB_ADDR=0x8000000
+keyboardio_model_100.build.core=maple
+keyboardio_model_100.build.board=GENERIC_STM32F103C
+keyboardio_model_100.build.error_led_port=GPIOC
+keyboardio_model_100.build.error_led_pin=13
+keyboardio_model_100.build.f_cpu=48000000L
+keyboardio_model_100.upload.use_1200bps_touch=false
+keyboardio_model_100.upload.file_type=bin
+keyboardio_model_100.upload.auto_reset=true
+keyboardio_model_100.upload.tool=maple_upload
+keyboardio_model_100.upload.protocol=maple_dfu
+keyboardio_model_100.build.cpu_flags=-DMCU_STM32F103C6
+keyboardio_model_100.build.ldscript=ld/jtag_c6.ld
+keyboardio_model_100.build.mcu=cortex-m4
+keyboardio_model_100.upload.maximum_size=1048576
+keyboardio_model_100.upload.maximum_data_size=98304
+keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-Keyboardio-Model100.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON
 
 
 #---------------------------- UPLOAD METHODS ---------------------------
 
-kbio_test.menu.upload_method.DFUUploadMethod=STM32duino bootloader
-kbio_test.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
-kbio_test.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
-kbio_test.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
-kbio_test.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
-kbio_test.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader_20_c6.ld
-kbio_test.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
-kbio_test.menu.upload_method.DFUUploadMethod.upload.altID=2
-kbio_test.menu.upload_method.DFUUploadMethod.upload.maximum_size=24576
+keyboardio_model_100.menu.upload_method.DFUUploadMethod=STM32duino bootloader
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader_20_c6.ld
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.altID=2
+keyboardio_model_100.menu.upload_method.DFUUploadMethod.upload.maximum_size=24576
 
-kbio_test.menu.upload_method.serialMethod=Serial
-kbio_test.menu.upload_method.serialMethod.upload.protocol=maple_serial
-kbio_test.menu.upload_method.serialMethod.upload.tool=serial_upload
-kbio_test.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
+keyboardio_model_100.menu.upload_method.serialMethod=Serial
+keyboardio_model_100.menu.upload_method.serialMethod.upload.protocol=maple_serial
+keyboardio_model_100.menu.upload_method.serialMethod.upload.tool=serial_upload
+keyboardio_model_100.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
 
-kbio_test.menu.upload_method.STLinkMethod=STLink
-kbio_test.menu.upload_method.STLinkMethod.upload.protocol=STLink
-kbio_test.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
-kbio_test.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-kbio_test.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-kbio_test.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-kbio_test.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-kbio_test.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
-
-kbio_test.menu.upload_method.jlinkMethod=JLink
-kbio_test.menu.upload_method.jlinkMethod.upload.protocol=jlink
-kbio_test.menu.upload_method.jlinkMethod.upload.tool=jlink_upload
-kbio_test.menu.upload_method.jlinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
-
-#kbio_test.menu.upload_method.HIDUploadMethod=HID bootloader 2.0
-#kbio_test.menu.upload_method.HIDUploadMethod.upload.tool=hid_upload
-#kbio_test.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
-#kbio_test.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8001000
-#kbio_test.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader_c6.ld
-
-#-- CPU Clock frequency
-kbio_test.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
-kbio_test.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
-
-kbio_test.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
-kbio_test.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
-
-kbio_test.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
-kbio_test.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
-
+keyboardio_model_100.menu.upload_method.STLinkMethod=STLink
+keyboardio_model_100.menu.upload_method.STLinkMethod.upload.protocol=STLink
+keyboardio_model_100.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+keyboardio_model_100.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
 
 #-- Optimizations
-kbio_test.menu.opt.osstd=Smallest (default)
-#kbio_test.menu.opt.oslto=Smallest Code with LTO
-#kbio_test.menu.opt.oslto.build.flags.optimize=-Os -flto
-#kbio_test.menu.opt.oslto.build.flags.ldspecs=-flto
-kbio_test.menu.opt.o1std=Fast (-O1)
-kbio_test.menu.opt.o1std.build.flags.optimize=-O1
-kbio_test.menu.opt.o1std.build.flags.ldspecs=
-#kbio_test.menu.opt.o1lto=Fast (-O1) with LTO
-#kbio_test.menu.opt.o1lto.build.flags.optimize=-O1 -flto
-#kbio_test.menu.opt.o1lto.build.flags.ldspecs=-flto
-kbio_test.menu.opt.o2std=Faster (-O2)
-kbio_test.menu.opt.o2std.build.flags.optimize=-O2
-kbio_test.menu.opt.o2std.build.flags.ldspecs=
-#kbio_test.menu.opt.o2lto=Faster (-O2) with LTO
-#kbio_test.menu.opt.o2lto.build.flags.optimize=-O2 -flto
-#kbio_test.menu.opt.o2lto.build.flags.ldspecs=-flto
-kbio_test.menu.opt.o3std=Fastest (-O3)
-kbio_test.menu.opt.o3std.build.flags.optimize=-O3
-kbio_test.menu.opt.o3std.build.flags.ldspecs=
-#kbio_test.menu.opt.o3lto=Fastest (-O3) with LTO
-#kbio_test.menu.opt.o3lto.build.flags.optimize=-O3 -flto
-#kbio_test.menu.opt.o3lto.build.flags.ldspecs=-flto
-kbio_test.menu.opt.ogstd=Debug (-g)
-kbio_test.menu.opt.ogstd.build.flags.optimize=-Og
-kbio_test.menu.opt.ogstd.build.flags.ldspecs=
+keyboardio_model_100.menu.opt.osstd=Smallest (default)
+#keyboardio_model_100.menu.opt.oslto=Smallest Code with LTO
+#keyboardio_model_100.menu.opt.oslto.build.flags.optimize=-Os -flto
+#keyboardio_model_100.menu.opt.oslto.build.flags.ldspecs=-flto
+keyboardio_model_100.menu.opt.o1std=Fast (-O1)
+keyboardio_model_100.menu.opt.o1std.build.flags.optimize=-O1
+keyboardio_model_100.menu.opt.o1std.build.flags.ldspecs=
+#keyboardio_model_100.menu.opt.o1lto=Fast (-O1) with LTO
+#keyboardio_model_100.menu.opt.o1lto.build.flags.optimize=-O1 -flto
+#keyboardio_model_100.menu.opt.o1lto.build.flags.ldspecs=-flto
+keyboardio_model_100.menu.opt.o2std=Faster (-O2)
+keyboardio_model_100.menu.opt.o2std.build.flags.optimize=-O2
+keyboardio_model_100.menu.opt.o2std.build.flags.ldspecs=
+#keyboardio_model_100.menu.opt.o2lto=Faster (-O2) with LTO
+#keyboardio_model_100.menu.opt.o2lto.build.flags.optimize=-O2 -flto
+#keyboardio_model_100.menu.opt.o2lto.build.flags.ldspecs=-flto
+keyboardio_model_100.menu.opt.o3std=Fastest (-O3)
+keyboardio_model_100.menu.opt.o3std.build.flags.optimize=-O3
+keyboardio_model_100.menu.opt.o3std.build.flags.ldspecs=
+#keyboardio_model_100.menu.opt.o3lto=Fastest (-O3) with LTO
+#keyboardio_model_100.menu.opt.o3lto.build.flags.optimize=-O3 -flto
+#keyboardio_model_100.menu.opt.o3lto.build.flags.ldspecs=-flto
+keyboardio_model_100.menu.opt.ogstd=Debug (-g)
+keyboardio_model_100.menu.opt.ogstd.build.flags.optimize=-Og
+keyboardio_model_100.menu.opt.ogstd.build.flags.ldspecs=
 
 ==============
 
@@ -443,7 +419,7 @@ genericSTM32F103C.upload.file_type=bin
 genericSTM32F103C.upload.auto_reset=true
 genericSTM32F103C.upload.tool=maple_upload
 genericSTM32F103C.upload.protocol=maple_dfu
-#genericSTM32F103C.build.extra_flags='-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' -DKBIO_TEST
+#genericSTM32F103C.build.extra_flags='-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' -DKEYBOARDIO_MODEL_100
 
 
 ## STM32F103C8 -------------------------
@@ -554,7 +530,7 @@ genericSTM32F103C6.build.cpu_flags=-DMCU_STM32F103C6
 genericSTM32F103C6.build.ldscript=ld/jtag_c6.ld
 genericSTM32F103C6.upload.maximum_size=32768
 genericSTM32F103C6.upload.maximum_data_size=10240
-genericSTM32F103C6.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKBIO_TEST -DUSBCON
+genericSTM32F103C6.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-STM32-Test.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON
 
 
 #---------------------------- UPLOAD METHODS ---------------------------
