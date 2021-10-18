@@ -181,34 +181,18 @@ uint8_t HIDKeyboard::getKeyCode(uint8_t k, uint8_t* modifiersP)
 }
 
 size_t HIDKeyboard::press(uint8_t k) {
-    uint8_t modifiers;
-
-    k = getKeyCode(k, &modifiers);
-
-    if (k == 0) {
-        if (modifiers == 0) {
-            return 0;
-        }
+  for (unsigned i = 0; i<HID_KEYBOARD_ROLLOVER; i++) {
+    if (keyReport.keys[i] == k) {
+      return 1;
     }
-    else {
-        for (unsigned i = 0; i<HID_KEYBOARD_ROLLOVER; i++) {
-            if (keyReport.keys[i] == k) {
-                goto SEND;
-            }
-        }
-        for (unsigned i = 0; i<HID_KEYBOARD_ROLLOVER; i++) {
-            if (keyReport.keys[i] == 0) {
-                keyReport.keys[i] = k;
-                goto SEND;
-            }
-        }
-        return 0;
+  }
+  for (unsigned i = 0; i<HID_KEYBOARD_ROLLOVER; i++) {
+    if (keyReport.keys[i] == 0) {
+      keyReport.keys[i] = k;
+      return 1;
     }
-
-SEND:
-    keyReport.modifiers |= modifiers;
-    //sendReport();
-    return 1;
+  }
+  return 0;
 }
 
 #define HID_KEYBOARD_FIRST_MODIFIER 0xE0
@@ -261,31 +245,20 @@ bool HIDKeyboard::wasAnyModifierActive() {
 // it shouldn't be repeated any more.
 size_t HIDKeyboard::release(uint8_t k)
 {
-    uint8_t modifiers;
-    k = getKeyCode(k, &modifiers);
-
     if (k != 0) {
         for (unsigned i=0; i<HID_KEYBOARD_ROLLOVER; i++) {
              if (keyReport.keys[i] == k) {
                  keyReport.keys[i] = 0;
-                 break;
+                 return 1;
              }
         }
     }
-    else {
-        if (modifiers == 0)
-            return 0;
-    }
-
-    keyReport.modifiers &= ~modifiers;
-
-    //sendReport();
-	return 1;
+    return 0;
 }
 
 void HIDKeyboard::releaseAll(void)
 {
-    memset(keyReport.keys, 0, HID_KEYBOARD_ROLLOVER);
+  memset(keyReport.keys, 0, HID_KEYBOARD_ROLLOVER);
 	keyReport.modifiers = 0;
 
 	//sendReport();
