@@ -29,7 +29,7 @@ keyboardio_model_100.build.ldscript=ld/jtag_c6.ld
 keyboardio_model_100.build.mcu=cortex-m4
 keyboardio_model_100.upload.maximum_size=1048576
 keyboardio_model_100.upload.maximum_data_size=98304
-keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-Keyboardio-Model100.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON -DKBIO_TEST
+keyboardio_model_100.build.extra_flags= {build.upload_flags} {build.cpu_flags} {build.hs_flag} {build.common_flags} '-DKALEIDOSCOPE_HARDWARE_H="Kaleidoscope-Hardware-Keyboardio-Model100.h"' '-DUSB_PRODUCT="gd32"' -DKEYBOARDIO_MODEL_100 -DUSBCON -DKBIO_TEST -DARDUINO_keyboardio_model_100
 
 
 #---------------------------- UPLOAD METHODS ---------------------------
