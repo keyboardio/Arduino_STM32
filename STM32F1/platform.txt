@@ -7,10 +7,10 @@ name=STM32F1 Boards (Arduino_STM32)
 version=0.1.2
 
 compiler.warning_flags=-w -DDEBUG_LEVEL=DEBUG_NONE
-compiler.warning_flags.none=-w -DDEBUG_LEVEL=DEBUG_NONE -Wno-unused-parameter
+compiler.warning_flags.none=-w -DDEBUG_LEVEL=DEBUG_NONE -Wno-unused-parameter -Wno-ignored-qualifiers
 compiler.warning_flags.default=-DDEBUG_LEVEL=DEBUG_NONE
 compiler.warning_flags.more=-Wall -DDEBUG_LEVEL=DEBUG_FAULT
-compiler.warning_flags.all=-Wall -Wextra -DDEBUG_LEVEL=DEBUG_ALL -Wno-unused-parameter
+compiler.warning_flags.all=-Wall -Wextra -DDEBUG_LEVEL=DEBUG_ALL -Wno-unused-parameter -Wno-ignored-qualifiers
 
 # compiler variables
 # ----------------------
