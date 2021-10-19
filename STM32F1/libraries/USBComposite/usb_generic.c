@@ -97,6 +97,12 @@ uint16 epTypes[4] = {
 //#define REQUEST_TYPE                      0b01100000u
 #define REQUEST_RECIPIENT                 0b00011111u
 
+#ifndef BOARD_USB_DISC_DISCONNECTED_STATE
+
+#define BOARD_USB_DISC_DISCONNECTED_STATE 1
+
+#endif
+
 static usb_descriptor_device usbGenericDescriptor_Device =
   {                                                                     
       .bLength            = sizeof(usb_descriptor_device),              
@@ -371,7 +377,7 @@ void usb_generic_enable(void) {
 
     if (BOARD_USB_DISC_DEV != NULL) {
         gpio_set_mode(BOARD_USB_DISC_DEV, (uint8)(uint32)BOARD_USB_DISC_BIT, GPIO_OUTPUT_PP);
-        gpio_write_bit(BOARD_USB_DISC_DEV, (uint8)(uint32)BOARD_USB_DISC_BIT, 0);
+        gpio_write_bit(BOARD_USB_DISC_DEV, (uint8)(uint32)BOARD_USB_DISC_BIT, !BOARD_USB_DISC_DISCONNECTED_STATE);
     }
 
     saved_Device_Table = Device_Table;
@@ -494,7 +500,7 @@ void usb_generic_disable(void) {
     usb_generic_disable_interrupts_ep0();
     
     if (BOARD_USB_DISC_DEV != NULL) {
-        gpio_write_bit(BOARD_USB_DISC_DEV, (uint8)(uint32)BOARD_USB_DISC_BIT, 1);
+        gpio_write_bit(BOARD_USB_DISC_DEV, (uint8)(uint32)BOARD_USB_DISC_BIT, BOARD_USB_DISC_DISCONNECTED_STATE);
     }
     
     usb_power_down();
