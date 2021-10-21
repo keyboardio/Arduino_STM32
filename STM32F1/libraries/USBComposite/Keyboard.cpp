@@ -141,8 +141,8 @@ static const uint8_t ascii_to_hid[128] =
 
 void HIDKeyboard::begin(void){
     HID.addOutputBuffer(&ledData);
+    // We need this to be blank, at least for the first comparison. It doesn't matter that its report id won't be right
     memset(&last_report_, 0, sizeof(last_report_));
-    memset(&keyReport, 0, sizeof(keyReport));
 }
 
 void HIDKeyboard::end(void) {
